@@ -1,22 +1,26 @@
-function [ im_aligned ] = multi_scale_align( A, S, DY, DX, N )
-%MULTI_SCALE_ALIGN Uses a Gaussian image pyramid to align an image S to an
-%                  anchor A within a displacement range D
+% Read image and grab the dimensions
+im = imread('images/00173u.tif');
+dimensions = size(im);
+height = int64(dimensions(1)/3);
+width = int64(dimensions(2));
 
-%Generate the image pyramid for A and S
-pA = pyramid(A, N);
-pS = pyramid(S, N);
+% Segment the image into thirds
+im_b = im(1:height, 1:width);
+im_g = im(height:height*2 - 1, 1:width);
+im_r = im(height*2:height*3 - 1, 1:width);
 
-%Align the image
-s = [1 1];
-for i = N:-1:1
-    DY = s(1) * i;   %multiplicative or additive?
-    DX = s(2) * i; 
-    N
-    [DY DX]
-    [im_aligned, s] = single_scale_align(pA{i}, pS{i}, DY, DX);
-end
+% Find the best shift to align the images, using an image pyramid
+g_shift = pyramid_findshift(double(im_b), double(im_g), 5);
+r_shift = pyramid_findshift(double(im_b), double(im_r), 5);
 
-im_aligned = uint8(im_aligned);
+% Perform the aligment
+im_g = circshift(im_g, g_shift);
+im_r = circshift(im_r, r_shift);
 
-end
+% Convert back to uint8 to display
+im_g = uint8(im_g);
+im_r = uint8(im_r);
 
+% Combine and display the result
+im = cat(3, im_r, im_g, im_b);
+imshow(im);
