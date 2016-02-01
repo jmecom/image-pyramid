@@ -1,5 +1,5 @@
 % Read image and grab the dimensions
-im = imread('images/00173u.tif');
+im = imread('images/01657u.tif');
 dimensions = size(im);
 height = int64(dimensions(1)/3);
 width = int64(dimensions(2));

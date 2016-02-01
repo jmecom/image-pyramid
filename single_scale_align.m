@@ -4,6 +4,7 @@ dimensions = size(im);
 height = int64(dimensions(1)/3);
 width = int64(dimensions(2));
 
+
 % Segment the image into thirds
 im_b = im(1:height, 1:width);
 im_g = im(height:height*2 - 1, 1:width);
