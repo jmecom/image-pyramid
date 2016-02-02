@@ -1,9 +1,11 @@
-% Read image and grab the dimensions
-im = imread('images/01657v.jpg');
+% Read and crop image
+im = imread('images/00153v.jpg');
+im = autocrop(im, 2, -100);
 dimensions = size(im);
 height = int64(dimensions(1)/3);
 width = int64(dimensions(2));
 
+im = imadjust(im);
 
 % Segment the image into thirds
 im_b = im(1:height, 1:width);
