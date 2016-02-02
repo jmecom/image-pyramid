@@ -6,7 +6,7 @@ height = int64(dimensions(1)/3);
 width = int64(dimensions(2));
 
 % Image quality adjustments
-im = imadjust(im);
+im = imadjust(im, [.1 .8]);
 im = imsharpen(im);
 
 % Segment the image into thirds

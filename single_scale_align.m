@@ -1,11 +1,13 @@
 % Read and crop image
-im = imread('images/00153v.jpg');
+im = imread('images/01055v.jpg');
 im = autocrop(im, 2, -100);
 dimensions = size(im);
 height = int64(dimensions(1)/3);
 width = int64(dimensions(2));
 
-im = imadjust(im);
+% Image quality adjustments, useful for 
+% low contrast images in particular
+im = imadjust(im, [.1 .8]);
 
 % Segment the image into thirds
 im_b = im(1:height, 1:width);
@@ -13,8 +15,8 @@ im_g = im(height:height*2 - 1, 1:width);
 im_r = im(height*2:height*3 - 1, 1:width);
 
 % Find the best shift to align the images, using brute-force
-g_shift = findshift(double(im_b), double(im_g), 15);
-r_shift = findshift(double(im_b), double(im_r), 15);
+g_shift = edges_findshift(double(im_b), double(im_g), 15);
+r_shift = edges_findshift(double(im_b), double(im_r), 15);
 
 % Perform the aligment
 im_g = circshift(im_g, g_shift);
