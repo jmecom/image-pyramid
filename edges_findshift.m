@@ -3,11 +3,11 @@ function [ shift ] = edges_findshift( A, S, R )
 %                Compares the ssd of the edges of two images, instead
 %                of just the two images
 best = inf;
-A_edges = edge(A);
+A_edges = edge(A, 'canny');
 for dy = -R:R
     for dx = -R:R
         shifted = circshift(S, [dy dx]);        
-        shifted_edges = edge(shifted);    
+        shifted_edges = edge(shifted, 'canny');    
         score = sum((A_edges(:)-shifted_edges(:)).^2);   
         if score <= best
             best = score;
