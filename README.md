@@ -1,7 +1,8 @@
 # image-pyramid
 
-![](http://imgur.com/ErVn56M)
-**Image from [Robert Pless' Computational Photography course at Washington University in St. Louis](http://www.cs.wustl.edu/~pless/classes/555/proj1/)
+![](http://i.imgur.com/ErVn56M.jpg)
+
+**Image from [Robert Pless' Computational Photography course at Washington University in St. Louis](http://www.cs.wustl.edu/~pless/classes/555/proj1/)**
 
 #### [Full writeup  here.](http://jmecom.github.io/projects/computational-photography/image-alignment/)
 
